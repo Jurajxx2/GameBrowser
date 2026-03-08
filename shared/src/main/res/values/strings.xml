@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Error states -->
+    <string name="error_title">Oops!</string>
+    <string name="error_retry">Retry</string>
+    <string name="error_no_internet">Please check your internet connection.</string>
+    <string name="error_server">Server error. Please try again later.</string>
+    <string name="error_not_found">The requested content could not be found.</string>
+    <string name="error_unknown">Something went wrong. Please try again.</string>
+
+    <!-- Games list -->
+    <string name="games_list_title">Games</string>
+    <string name="error_load_more">Failed to load more.</string>
+
+    <!-- Game detail -->
+    <string name="game_detail_back">Back</string>
+    <string name="game_detail_metacritic">Metacritic: %d</string>
+    <string name="game_detail_released">Released: %s</string>
+    <string name="game_detail_ratings_count">%d ratings</string>
+</resources>
