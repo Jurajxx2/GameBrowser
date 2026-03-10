@@ -1,10 +1,11 @@
+@file:OptIn(kotlinx.serialization.InternalSerializationApi::class)
+
 package com.juraj.gamebrowser.data.remote.dto
 
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@InternalSerializationApi @Serializable
+@Serializable
 data class GameDetailDto(
     val id: Int,
     val name: String,

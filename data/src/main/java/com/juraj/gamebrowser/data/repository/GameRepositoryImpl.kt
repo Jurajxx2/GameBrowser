@@ -14,7 +14,6 @@ import com.juraj.gamebrowser.domain.model.Game
 import com.juraj.gamebrowser.domain.model.GameDetail
 import com.juraj.gamebrowser.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.serialization.InternalSerializationApi
 
 class GameRepositoryImpl(
     private val apiService: RawgApiService,
@@ -29,7 +28,6 @@ class GameRepositoryImpl(
         pagingSourceFactory = { GamesPagingSource(apiService) }
     ).flow
 
-    @OptIn(InternalSerializationApi::class)
     override suspend fun getGameDetail(id: Int): Result<GameDetail> {
         // return from cache if there is anything
         gameDetailDao.getById(id)?.let { cached ->

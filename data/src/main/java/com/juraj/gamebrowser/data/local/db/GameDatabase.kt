@@ -7,7 +7,7 @@ import com.juraj.gamebrowser.data.local.entity.GameDetailEntity
 @Database(
     entities = [GameDetailEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class GameDatabase : RoomDatabase() {
 

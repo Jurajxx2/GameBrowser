@@ -6,11 +6,13 @@ import com.juraj.gamebrowser.feature.detail.di.featureDetailModule
 import com.juraj.gamebrowser.feature.list.di.featureListModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class GameBrowserApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         startKoin {
             androidContext(this@GameBrowserApp)
             modules(

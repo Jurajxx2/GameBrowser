@@ -3,17 +3,19 @@ package com.juraj.gamebrowser.navigation
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.juraj.gamebrowser.feature.detail.GameDetailScreen
 import com.juraj.gamebrowser.feature.list.GamesListScreen
+import kotlinx.serialization.Serializable
 
-private const val ROUTE_GAMES_LIST = "games_list"
-private const val ROUTE_GAME_DETAIL = "game_detail/{gameId}"
-private const val ARG_GAME_ID = "gameId"
+@Serializable
+data object GamesListRoute
+
+@Serializable
+data class GameDetailRoute(val gameId: Int)
 
 @Composable
 fun AppNavGraph() {
@@ -21,27 +23,24 @@ fun AppNavGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = ROUTE_GAMES_LIST,
+        startDestination = GamesListRoute,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { -it }) },
         popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) },
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
-        composable(ROUTE_GAMES_LIST) {
+        composable<GamesListRoute> {
             GamesListScreen(
                 onGameClick = { gameId ->
-                    navController.navigate("game_detail/$gameId")
+                    navController.navigate(GameDetailRoute(gameId))
                 }
             )
         }
 
-        composable(
-            route = ROUTE_GAME_DETAIL,
-            arguments = listOf(navArgument(ARG_GAME_ID) { type = NavType.IntType })
-        ) { backStackEntry ->
-            val gameId = backStackEntry.arguments?.getInt(ARG_GAME_ID) ?: return@composable
+        composable<GameDetailRoute> { backStackEntry ->
+            val route: GameDetailRoute = backStackEntry.toRoute()
             GameDetailScreen(
-                gameId = gameId,
+                gameId = route.gameId,
                 onBack = { navController.popBackStack() }
             )
         }

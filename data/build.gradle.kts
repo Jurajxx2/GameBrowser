@@ -23,6 +23,10 @@ android {
     }
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
     implementation(project(":domain"))
 
@@ -44,4 +48,6 @@ dependencies {
 
     // Koin
     implementation(libs.koin.android)
+
+    implementation(libs.timber)
 }

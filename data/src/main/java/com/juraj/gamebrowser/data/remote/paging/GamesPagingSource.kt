@@ -6,13 +6,11 @@ import com.juraj.gamebrowser.data.remote.api.RawgApiService
 import com.juraj.gamebrowser.data.remote.mapper.toDomain
 import com.juraj.gamebrowser.data.util.safePagingLoad
 import com.juraj.gamebrowser.domain.model.Game
-import kotlinx.serialization.InternalSerializationApi
 
 class GamesPagingSource(
     private val apiService: RawgApiService
 ) : PagingSource<Int, Game>() {
 
-    @OptIn(InternalSerializationApi::class)
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Game> {
         val page = params.key ?: STARTING_PAGE
         return safePagingLoad {

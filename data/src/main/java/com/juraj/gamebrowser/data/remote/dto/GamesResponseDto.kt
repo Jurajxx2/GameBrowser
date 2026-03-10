@@ -1,18 +1,18 @@
+@file:OptIn(kotlinx.serialization.InternalSerializationApi::class)
+
 package com.juraj.gamebrowser.data.remote.dto
 
-import android.annotation.SuppressLint
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@InternalSerializationApi @Serializable
+@Serializable
 data class GamesResponseDto(
     val count: Int,
     val next: String?,
     val results: List<GameDto>
 )
 
-@InternalSerializationApi @Serializable
+@Serializable
 data class GameDto(
     val id: Int,
     val name: String,
