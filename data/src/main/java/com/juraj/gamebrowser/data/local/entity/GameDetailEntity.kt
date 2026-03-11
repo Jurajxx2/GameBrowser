@@ -12,5 +12,6 @@ data class GameDetailEntity(
     val description: String,
     val ratingsCount: Int,
     val released: String?,
-    val metacritic: Int?
+    val metacritic: Int?,
+    val cachedAt: Long
 )

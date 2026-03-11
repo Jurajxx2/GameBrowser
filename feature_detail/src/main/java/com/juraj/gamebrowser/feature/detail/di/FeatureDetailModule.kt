@@ -7,5 +7,10 @@ import org.koin.dsl.module
 
 val featureDetailModule = module {
     factory { GetGameDetailUseCase(repository = get()) }
-    viewModel { GameDetailViewModel(getGameDetailUseCase = get()) }
+    viewModel { params ->
+        GameDetailViewModel(
+            getGameDetailUseCase = get(),
+            gameId = params.get()
+        )
+    }
 }

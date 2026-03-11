@@ -14,6 +14,7 @@ import com.juraj.gamebrowser.domain.model.Game
 import com.juraj.gamebrowser.domain.model.GameDetail
 import com.juraj.gamebrowser.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow
+import java.util.concurrent.TimeUnit
 
 class GameRepositoryImpl(
     private val apiService: RawgApiService,
@@ -29,9 +30,9 @@ class GameRepositoryImpl(
     ).flow
 
     override suspend fun getGameDetail(id: Int): Result<GameDetail> {
-        // return from cache if there is anything
         gameDetailDao.getById(id)?.let { cached ->
-            return Result.success(cached.toDomain())
+            val isFresh = System.currentTimeMillis() - cached.cachedAt < CACHE_TTL_MS
+            if (isFresh) return Result.success(cached.toDomain())
         }
 
         return safeApiCall {
@@ -43,5 +44,6 @@ class GameRepositoryImpl(
 
     companion object {
         private const val PAGE_SIZE = 20
+        private val CACHE_TTL_MS = TimeUnit.HOURS.toMillis(1)
     }
 }

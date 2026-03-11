@@ -22,5 +22,6 @@ fun GameDetail.toEntity() = GameDetailEntity(
     description = description,
     ratingsCount = ratingsCount,
     released = released,
-    metacritic = metacritic
+    metacritic = metacritic,
+    cachedAt = System.currentTimeMillis()
 )

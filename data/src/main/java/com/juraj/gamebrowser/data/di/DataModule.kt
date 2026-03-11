@@ -50,7 +50,9 @@ fun dataModule(apiKey: String) = module {
             androidContext(),
             GameDatabase::class.java,
             "game_browser.db"
-        ).build()
+        )
+            .addMigrations(GameDatabase.MIGRATION_1_2)
+            .build()
     }
 
     single { get<GameDatabase>().gameDetailDao() }
